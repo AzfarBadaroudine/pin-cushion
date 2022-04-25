@@ -472,7 +472,11 @@ class PinCushionHUD extends BasePlaceableHUD {
         let content;
 
         if (previewType === "html") {
-            content = TextEditor.enrichHTML(entry.data.content, {secrets: entry.isOwner, entities: true});
+			if (entry.data.img) {
+				content = TextEditor.enrichHTML("<img src=\""+entry.data.img+"\">", {secrets: entry.isOwner, entities: true});		//Az
+			}else{
+				content = TextEditor.enrichHTML(entry.data.content, {secrets: entry.isOwner, entities: true});
+			}
         } else if (previewType === "text") {
             const previewMaxLength = game.settings.get(PinCushion.MODULE_NAME, "previewMaxLength");
 
